@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Петербургский музей</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Order_%28PSF%29_num.png/800px-Order_%28PSF%29_num.png" style="width:100%"></p>
+        {% if error %}
+            <p class="error"><strong>Ошибка.</strong> {{ error }}</p>
+        {% elif flag %}
+            <p class="success"><strong>Ваши данные корректны на {{ (rate * 100) | int }} %. Флаг:</strong> {{ flag }}</p>
+        {% elif rate is defined %}
+            <p class="warning"><strong>Ваши данные корректны на {{ (rate * 100) | int }} %.</strong> А надо 75 %.</p>
+        {% endif %}
+        <h1>Передача информации в музей</h1>
+        <p>Пожалуйста, подготовьте данные в формате JSON. Данные должны представлять собой массив, содержащий объекты
+           с требуемой информацией, по одному на человека. Поля, значения которых неизвестны (в том числе годы смерти
+           ныне живущих людей), должны иметь значение <tt>null</tt>.</p>
+        <p>Изображение с заданным именем файла должно открываться в русской Википедии. Пример: <tt>Сидоров_АФ.jpg</tt>
+           соответствует изображению <a href="http://ru.wikipedia.org/wiki/Файл:Сидоров_АФ.jpg">Файл:Сидоров АФ.jpg</a>.</p>
+        <p>Пример оформления данных:</p>
+        <pre>
+[
+  {
+    "name": "Сидоров, Анатолий Фёдорович",
+    "born": 1933,
+    "died": 1999,
+    "pic": "Сидоров_АФ.jpg"
+  },
+  {
+    "name": "Штакельберг, Александр Александрович",
+    "born": 1897,
+    "died": 1975,
+    "pic": null
+  }
+]
+        </pre>
+        <p>Для успешной сдачи данные должны быть корректны хотя бы на 75 %
+           (так что использование различных методов сбора информации и изменения в Википедии не должны препятствовать).</p>
+        <p>У вас должно получиться примерно 1500 человек, примерно 1000 из них — с изображениями.</p>
+        {% if not flag %}
+        <form method="post" action=".">
+            <p><textarea name="data" placeholder="Ваши данные">{{ data }}</textarea>
+            <p><input type="submit" value="Отправить">
+        </form>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Login PHP</title>
+	<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+	<div class="lg-container">
+		<h1>Войдите</h1>
+		<form action="" id="lg-form" name="lg-form" method="post">
+			
+			<div>
+				<label for="username">Логин:</label>
+				<input type="text" name="username" id="username" placeholder="username"/>
+			</div>
+			
+			<div>
+				<label for="password">Пароль:</label>
+				<input type="password" name="password" id="password" placeholder="password" />
+			</div>
+			
+			<div>				
+				<button type="submit" id="login">Войти</button>
+			</div>
+			
+		</form>
+		<div id="message">
+			{% if error == "invalid-signature" %}
+			<p class="error">Ваш cookie-файл некорректен. Очистите cookie-набор браузера.</p>
+			{% elif error == "non-jwt-cookie" %}
+			<p class="error">Ваш cookie-файл не соответствует стандарту JavaScript объектной нотации всемирной паутины жетона.</p>
+			{% elif error == "jwt-error" %}
+			<p class="error">Произошла внутренняя ошибка системы.</p>
+			{% elif error == "missing-fields" %}
+			<p class="error">Ваш cookie-файл не содержит обязательных признаков безопасности.</p>
+			{% elif error == "expired" %}
+			<p class="error">Ваш cookie-файл истёк. Авторизуйтесь заново.</p>
+			{% elif error == "weak" %}
+			<p class="error">Ваш cookie-файл не отвечает требованиям по длительности сессии.</p>
+			{% elif error == "unknown-user" %}
+			<p class="error">Пользователь с таким логином не найден.</p>
+			{% elif error == "wrong-password" %}
+			<p class="error">Неверный логин или пароль.</p>
+			{% elif error == "time-broken" %}
+			<p class="error">Проверьте настройки времени.</p>
+			{% elif error == "no-cookie" %}
+			{% else %}
+			<p class="error">Произошла неизвестная ошибка: {{ error }}</p>
+			{% endif %}
+	
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Смешные видео!</title>
+    </head>
+    <body>
+        <div>Привет, {{ user }}!</div>
+        <div>
+            {% if flag %}
+                Ваше избранное видео: {{ flag }}
+            {% else %}
+                Новых видео нет.
+            {% endif %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+name: electrotech
+category: "ppc"
+title: "Антикапча"
+points:   5
+author:   kalan
+description: |
+    <p>Технологический прогресс не стоит на месте: в Рунете запустили первый сайт с доступом исключительно для искусственного интеллекта. Главная страница сайта оборудована решением «Антикапча» — для входа на сайт теперь нужно доказать, что вы робот.</p>
+    <p>Узнайте, какие секреты роботы уже скрывают от человечества.</p>
+    <p>Что почитать: <a href="https://school.teamteam.dev/ppc/network.html" target="_top">§3.4. Скачиваем интернет</a></p>
+generator: generate.py
+daemon: app/server.py
+daemon_socket: "electrotech.sock"

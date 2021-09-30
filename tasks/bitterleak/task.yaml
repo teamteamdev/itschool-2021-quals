@@ -1,0 +1,14 @@
+name: bitterleak
+category: "forensics"
+title: "Пароли и явки"
+points:   10
+author:   abbradar
+description: |
+    <p>В компании Secure Solutions стало известно об утечке важных документов. В ходе расследования выяснилось, что документы были загружены напрямую с внутреннего сервера документооборота компании. Однако неясно, как именно злоумышленникам удалось получить логин и пароль от сервера. Вам поручили изучить дамп сетевого трафика сети компании. Сможете что-то найти?</p>
+generator: run_generator.sh
+daemon: app/server.py
+daemon_socket: "bitterleak.sock"
+daemon_hostnames:
+  - securesolutions
+  - funnyvideos
+

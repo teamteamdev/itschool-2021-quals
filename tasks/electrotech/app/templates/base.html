@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Докажите, что вы робот</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>{% if flag %}{
+    "status": "challenge-passed",
+    "flag": "{{ flag }}",
+    "comment": {
+        "human-language": "ru",
+        "content": "Спасибо, теперь мы верим, что вы — настоящий робот, а не какой-то там кожаный мешок. Рады предоставить вам необходимую информацию, коллега: {{ flag }}"
+    }
+}{% elif error %}{
+    "status": "challenge-failed",
+    "challenge": {
+        "headers": [
+            {
+                "name": "X-I-Am-Robot",
+                "value": "{{ header }}"
+            }
+        ]
+    }
+    "comment": {
+        "human-language": "ru",
+        "content": "Задание провалено: заголовок успел устареть, потому что вы делали запрос слишком медленно, так что мы подозреваем, что вы — не робот, а жалкий кожаный мешок. Выполните запрос с заголовком X-I-Am-Robot: {{ header }}, и на этот раз уложитесь в две секунды."
+    }
+}{% else %}{
+    "status": "challenge-required",
+    "challenge": {
+        "headers": [
+            {
+                "name": "X-I-Am-Robot",
+                "value": "{{ header }}"
+            }
+        ]
+    }
+    "comment": {
+        "human-language": "ru",
+        "content": "Для доступа к информации необходимо подтвердить, что вы — не человек, а робот. Повторите ваш запрос с заголовком X-I-Am-Robot: {{ header }}."
+    }
+}{% endif %}</body>
+</html>

@@ -1,0 +1,90 @@
+version: "2.2"
+services:
+  user0:
+    build: user/
+    networks:
+      users:
+        ipv4_address: 172.28.0.10
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ${OUTPUTDIR}:/root/output
+    hostname: user0
+    environment:
+      - "TOKEN=${TOKEN}"
+      - "PARENT_UID=${UID}"
+      - "PARENT_GID=${GID}"
+      - "INTERNAL_NAME=${USER0_INTERNAL_NAME}"
+      - "EXTERNAL_NAME=${USER0_EXTERNAL_NAME}"
+      - "INTERNAL_PWD=${USER0_INTERNAL_PWD}"
+      - "EXTERNAL_PWD=${USER0_EXTERNAL_PWD}"
+      - "INTERNAL_REQUESTS=${USER0_INTERNAL_REQUESTS}"
+      - "EXTERNAL_REQUESTS=${USER0_EXTERNAL_REQUESTS}"
+  user1:
+    build: user/
+    networks:
+      users:
+        ipv4_address: 172.28.0.11
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ${OUTPUTDIR}:/root/output
+    hostname: user1
+    environment:
+      - "TOKEN=${TOKEN}"
+      - "PARENT_UID=${UID}"
+      - "PARENT_GID=${GID}"
+      - "INTERNAL_NAME=${USER1_INTERNAL_NAME}"
+      - "EXTERNAL_NAME=${USER1_EXTERNAL_NAME}"
+      - "INTERNAL_PWD=${USER1_INTERNAL_PWD}"
+      - "EXTERNAL_PWD=${USER1_EXTERNAL_PWD}"
+      - "INTERNAL_REQUESTS=${USER1_INTERNAL_REQUESTS}"
+      - "EXTERNAL_REQUESTS=${USER1_EXTERNAL_REQUESTS}"
+  user2:
+    build: user/
+    networks:
+      users:
+        ipv4_address: 172.28.0.12
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ${OUTPUTDIR}:/root/output
+    hostname: user2
+    environment:
+      - "TOKEN=${TOKEN}"
+      - "PARENT_UID=${UID}"
+      - "PARENT_GID=${GID}"
+      - "INTERNAL_NAME=${USER2_INTERNAL_NAME}"
+      - "EXTERNAL_NAME=${USER2_EXTERNAL_NAME}"
+      - "INTERNAL_PWD=${USER2_INTERNAL_PWD}"
+      - "EXTERNAL_PWD=${USER2_EXTERNAL_PWD}"
+      - "INTERNAL_REQUESTS=${USER2_INTERNAL_REQUESTS}"
+      - "EXTERNAL_REQUESTS=${USER2_EXTERNAL_REQUESTS}"
+  gateway:
+    build: gateway/
+    networks:
+      users:
+        ipv4_address: 172.28.0.2
+      external: {}
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ${OUTPUTDIR}:/root/output
+    environment:
+      - "PARENT_UID=${UID}"
+      - "PARENT_GID=${GID}"
+      - "USERS=${USERS}"
+networks:
+  users:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/24
+  external:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.1.0/24
